@@ -46,12 +46,9 @@ object AppModule {
     @Provides
     fun injectNormalRepo(dao: ArtDao,api:RetrofitAPI)=ArtRepository(dao,api) as ArtRepositoryInterface
 
-    @Singleton
-    @Provides
-    fun injectGlide(@ApplicationContext context: Context) = Glide
-        .with(context).setDefaultRequestOptions(
-            RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
-        )
+   @Singleton
+   @Provides
+   fun injectGlide(@ApplicationContext context:Context)=Glide.with(context).setDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_foreground).error(R.drawable.ic_launcher_background))
 
-}
+   }
+

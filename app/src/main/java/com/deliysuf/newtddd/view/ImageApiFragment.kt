@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ImageApiFragment @Inject constructor( private val imageRecyclerAdapter: ImageRecyclerAdapter):Fragment(R.layout.fragment_image_api) {
+class ImageApiFragment @Inject constructor(  val imageRecyclerAdapter: ImageRecyclerAdapter):Fragment(R.layout.fragment_image_api) {
 
    lateinit var viewModel:ArtViewModel
    private lateinit var fragmentBinding:FragmentImageApiBinding
@@ -34,7 +34,7 @@ class ImageApiFragment @Inject constructor( private val imageRecyclerAdapter: Im
         binding.searcText.addTextChangedListener {
             job?.cancel()
             job=lifecycleScope.launch{
-                delay(1000)
+                delay(3000)
                 it?.let {
                     if(it.toString().isNotEmpty()){
                         viewModel.searchForImage(it.toString())
