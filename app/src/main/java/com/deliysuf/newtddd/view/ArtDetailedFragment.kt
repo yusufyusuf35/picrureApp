@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class ArtDetailedFragment @Inject constructor( val glide:RequestManager):Fragment(R.layout.fragment_art_details) {
     private var fragmentBinding:FragmentArtDetailsBinding?=null
-     private lateinit var viewModel:ArtViewModel
+      lateinit var viewModel:ArtViewModel
     lateinit var art:Art
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,6 +29,7 @@ class ArtDetailedFragment @Inject constructor( val glide:RequestManager):Fragmen
         val binding=FragmentArtDetailsBinding.bind(view)
         fragmentBinding=binding
         viewModel=ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
+        subscribeViewModelObserver()
         binding.ArtImageView.setOnClickListener {
             findNavController().navigate(ArtDetailedFragmentDirections.actionArtDetailedFragment2ToImageApiFragment2())
         }

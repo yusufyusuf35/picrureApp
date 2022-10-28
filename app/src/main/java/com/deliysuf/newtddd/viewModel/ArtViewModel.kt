@@ -1,5 +1,6 @@
 package com.deliysuf.newtddd.viewModel
 
+import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +10,6 @@ import com.deliysuf.newtddd.repo.ArtRepositoryInterface
 import com.deliysuf.newtddd.roomdb.Art
 import com.deliysuf.newtddd.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -53,7 +52,7 @@ class ArtViewModel  @Inject constructor(
          if(name.isEmpty()||artistName.isEmpty()||year.isEmpty()){
              insertArtMsg.value=Resource.error("Enter name Artist and year"
                  ,null)
-
+             return
          }
         val yearInt=try {
              year.toInt()
@@ -70,19 +69,19 @@ class ArtViewModel  @Inject constructor(
     }
 
 
-    fun searchForImage(searchString:String){
-       if(searchString.isEmpty()) {
-           return
-       }
-
-            images.value=Resource.loading(null)
-        viewModelScope.launch {
-            val response=repository.searchImage(searchString)
-            images.value=response
+    fun searchForImage(searchString: String) {
+        if (searchString.isEmpty()) {
+            return
         }
 
+            images.value = Resource.loading(null)
+            viewModelScope.launch {
+                val response = repository.searchImage(searchString)
+                images.value = response
+            }
 
-    }
+
+        }
 
 
     override fun onCleared() {

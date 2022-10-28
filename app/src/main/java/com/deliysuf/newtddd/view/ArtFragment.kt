@@ -54,6 +54,7 @@ class ArtFragment @Inject constructor(
 
         //viewModel=ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
         fragmenBinding=binding
+        viewModel=ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
         subscribeObserver()
         binding.recyclerViewArt.adapter=artRecyclerAdapter
         binding.recyclerViewArt.layoutManager=LinearLayoutManager(requireContext())
